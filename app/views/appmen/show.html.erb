@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @appman.name %>
+</p>
+
+<p>
+  <strong>Stackmetadata:</strong>
+  <%= @appman.stackmetadata %>
+</p>
+
+<p>
+  <strong>Stackid:</strong>
+  <%= @appman.stackid %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @appman.details %>
+</p>
+
+<%= link_to 'Edit', edit_appman_path(@appman) %> |
+<%= link_to 'Back', appmen_path %>

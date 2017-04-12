@@ -1,0 +1,37 @@
+<%= form_for(appman) do |f| %>
+  <% if appman.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(appman.errors.count, "error") %> prohibited this appman from being saved:</h2>
+
+      <ul>
+      <% appman.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stackmetadata %>
+    <%= f.text_area :stackmetadata %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stackid %>
+    <%= f.text_field :stackid %>
+  </div>
+
+  <div class="field">
+    <%= f.label :details %>
+    <%= f.text_area :details %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

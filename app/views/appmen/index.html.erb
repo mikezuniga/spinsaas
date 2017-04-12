@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Appmen</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Stackmetadata</th>
+      <th>Stackid</th>
+      <th>Details</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @appmen.each do |appman| %>
+      <tr>
+        <td><%= appman.name %></td>
+        <td><%= appman.stackmetadata %></td>
+        <td><%= appman.stackid %></td>
+        <td><%= appman.details %></td>
+        <td><%= link_to 'Show', appman %></td>
+        <td><%= link_to 'Edit', edit_appman_path(appman) %></td>
+        <td><%= link_to 'Destroy', appman, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Appman', new_appman_path %>

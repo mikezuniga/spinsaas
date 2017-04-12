@@ -1,0 +1,2 @@
+module AppmenHelper
+end

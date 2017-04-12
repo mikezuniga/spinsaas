@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cloud.name %>
+</p>
+
+<p>
+  <strong>Provider:</strong>
+  <%= @cloud.provider %>
+</p>
+
+<p>
+  <strong>Apikey:</strong>
+  <%= @cloud.apikey %>
+</p>
+
+<p>
+  <strong>Secretkey:</strong>
+  <%= @cloud.secretkey %>
+</p>
+
+<p>
+  <strong>Endpoint:</strong>
+  <%= @cloud.endpoint %>
+</p>
+
+<%= link_to 'Edit', edit_cloud_path(@cloud) %> |
+<%= link_to 'Back', clouds_path %>
