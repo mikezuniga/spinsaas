@@ -1,4 +1,4 @@
 class Cloud < ApplicationRecord
   belongs_to :user
-  has_and_belongs_to_many :appmans
+  has_and_belongs_to_many :appmen
 end
