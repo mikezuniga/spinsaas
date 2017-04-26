@@ -4,12 +4,14 @@ class AppmenController < ApplicationController
   # GET /appmen
   # GET /appmen.json
   def index
-    @appmen = Appman.all
+    @appmen = @current_user.appmen.all
   end
 
   # GET /appmen/1
   # GET /appmen/1.json
   def show
+    stack = Appman.find(params[:id])
+    stack.getSpinnakerStack
   end
 
   # GET /appmen/new
@@ -19,13 +21,14 @@ class AppmenController < ApplicationController
 
   # GET /appmen/1/edit
   def edit
+    redirect_to ("/")
   end
 
   # POST /appmen
   # POST /appmen.json
   def create
     @appman = Appman.new(appman_params)
-
+    @appman.user_id = session[:user_id]
     respond_to do |format|
       if @appman.save
         format.html { redirect_to @appman, notice: 'Appman was successfully created.' }

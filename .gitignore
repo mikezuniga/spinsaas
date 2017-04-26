@@ -9,6 +9,7 @@ capybara-*.html
 /db/*.sqlite3-journal
 /public/system
 /coverage/
+/app/models/spinnaker-template.json
 /spec/tmp
 **.orig
 rerun.txt

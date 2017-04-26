@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170418201231) do
 
-  create_table "appmans_clouds", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer "appman_id"
-    t.integer "cloud_id"
-    t.index ["appman_id"], name: "index_appmans_clouds_on_appman_id", using: :btree
-    t.index ["cloud_id"], name: "index_appmans_clouds_on_cloud_id", using: :btree
-  end
-
   create_table "appmen", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.text     "stackmetadata", limit: 65535
@@ -28,6 +21,13 @@ ActiveRecord::Schema.define(version: 20170418201231) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["user_id"], name: "index_appmen_on_user_id", using: :btree
+  end
+
+  create_table "appmen_clouds", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "appman_id"
+    t.integer "cloud_id"
+    t.index ["appman_id"], name: "index_appmen_clouds_on_appman_id", using: :btree
+    t.index ["cloud_id"], name: "index_appmen_clouds_on_cloud_id", using: :btree
   end
 
   create_table "clouds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
