@@ -11,7 +11,7 @@ class AppmenController < ApplicationController
   # GET /appmen/1.json
   def show
     stack = Appman.find(params[:id])
-    stack.getSpinnakerStack
+    UpdateStackStatusJob.perform_later(stack)
   end
 
   # GET /appmen/new
@@ -31,6 +31,7 @@ class AppmenController < ApplicationController
     @appman.user_id = session[:user_id]
     respond_to do |format|
       if @appman.save
+        UpdateStackStatusJob.perform_later(@appman)        
         format.html { redirect_to @appman, notice: 'Appman was successfully created.' }
         format.json { render :show, status: :created, location: @appman }
       else
