@@ -21,20 +21,200 @@
     <%= f.text_field :provider %>
   </div>
 
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseazure" aria-expanded="false" aria-controls="collapseazure">
+  Azure
+</button>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsegoogle" aria-expanded="false" aria-controls="collapsegoogle">
+  Google Cloud Platform 
+</button>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsekubernetes" aria-expanded="false" aria-controls="collapsekubernetes">
+  Kubernetes
+</button>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsedockerregistry" aria-expanded="false" aria-controls="collapsedockerregistry">
+  Docker Registry
+</button>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseopenstack" aria-expanded="false" aria-controls="collapseopenstack">
+  Openstack
+</button> 
+ 
+<div class="collapse" id="collapseazure">
+  <%= f.label :azure %>
   <div class="field">
-    <%= f.label :apikey %>
-    <%= f.text_field :apikey %>
+    <%= f.label :azenabled, "Enabled?" %>
+    <%= f.text_field :azenabled %>
+  </div>
+  <div class="field">
+    <%= f.label :azclientid, "Client ID" %>
+    <%= f.text_field :azclientid %>
+  </div>
+  <div class="field">
+    <%= f.label :azappkey, "Application Key" %>
+    <%= f.text_field :azappkey %>
   </div>
 
   <div class="field">
-    <%= f.label :secretkey %>
-    <%= f.text_field :secretkey %>
+    <%= f.label :aztenantid, "Tenant ID" %>
+    <%= f.text_field :aztenantid %>
   </div>
 
   <div class="field">
-    <%= f.label :endpoint %>
-    <%= f.text_field :endpoint %>
+    <%= f.label :azsubscriptionid, "Subscription ID" %>
+    <%= f.text_field :azsubscriptionid %>
   </div>
+
+  <div class="field">
+    <%= f.label :azobjectid, "Object ID" %>
+    <%= f.text_field :azobjectid %>
+  </div>
+
+  <div class="field">
+    <%= f.label :azdefaultresourcegroup, "Default Resource Group" %>
+    <%= f.text_field :azdefaultsourcegroup %>
+  </div>
+
+  <div class="field">
+    <%= f.label :azdefaultkeyvault,"Default Key Vault" %>
+    <%= f.text_field :azdefaultkeyvault %>
+  </div>
+</div>
+
+
+<div class="collapse" id="collapsegoogle">
+  <%= f.label :google %>
+  <div class="field">
+    <%= f.label :gcpenabled, "Enabled?" %>
+    <%= f.text_field :gcpenabled %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :gcpdefaultregion, "Default Region" %>
+    <%= f.text_field :gcpdefaultregion %>
+  </div>
+ 
+  <div class="field">
+   <%= f.label :gcpdefaultzone, "Default Zone" %>
+   <%= f.text_field :gcpdefaultzone %>
+  </div>
+
+  <div class="field">
+   <%= f.label :gcpproject, "Project" %>
+   <%= f.text_field :gcpproject %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gcpjsonkey, "Key" %>
+    <%= f.text_area :gcpjsonkey %>
+  </div>
+</div>
+
+<div class="collapse" id="collapsekubernetes">
+  <%= f.label :kubernetes %>
+  <div class="field">
+   <%= f.label :k8senabled, "Enabled?" %>
+   <%= f.text_field :k8senabled %>
+  </div>
+
+  <div class="field">
+   <%= f.label :k8sdockerregistryaccount, "Docker Registry Account" %>
+   <%= f.text_field :k8sdockerregistryaccount %>
+  </div>
+
+  <div class="field">
+   <%= f.label :k8skubeconfig, "Kubeconfig" %>
+   <%= f.text_area :k8skubeconfig %>
+  </div>
+
+  <div class="field">
+   <%= f.label :k8snamespaces, "Namespaces" %>
+   <%= f.text_area :k8snamespaces %>
+  </div>
+
+  <div class="field">
+   <%= f.label :k8scontext, "Context" %>
+   <%= f.text_area :k8scontext %>
+  </div>
+
+  <div class="field">
+   <%= f.label :k8sdockerregistries, "Docker Registries" %>
+   <%= f.text_area :k8sdockerregistries %>
+  </div>
+</div>
+
+<div class="collapse" id="collapsedockerregistry">
+  <%= f.label :dockerregistry %>
+  <div class="field">
+   <%= f.label :drenabled, "Enabled?" %>
+   <%= f.text_area :drenable %>
+  </div>  
+
+  <div class="field">
+   <%= f.label :draddress, "Address" %>
+   <%= f.text_area :draddress %>
+  </div>
+ 
+  <div class="field">
+   <%= f.label :drusername, "Username" %>
+   <%= f.text_area :drusername %>
+  </div>
+
+  <div class="field">
+   <%= f.label :drpassword, "Password" %>
+   <%= f.text_area :drpassword %>
+  </div>
+
+  <div class="field">
+   <%= f.label :dremail, "Email" %>
+   <%= f.text_area :dremail %>
+  </div>
+
+  <div class="field">
+   <%= f.label :drrepositories, "Repositories" %>
+   <%= f.text_area :drrepositories %>
+  </div>
+</div>
+
+<div class="field" id="collapseopenstack">
+  <%= f.label :openstack %>
+  <div class="field">
+   <%= f.label :osenabled, "Enabled?" %>
+   <%= f.text_area :osenabled %>
+  </div>
+  
+  <div class="field">
+   <%= f.label :osauthurl, "Auth URL" %>
+   <%= f.text_area :osauthurl %>
+  </div>
+
+  <div class="field">
+   <%= f.label :osusername, "Username" %>
+   <%= f.text_area :osusername %>
+  </div>
+
+  <div class="field">
+   <%= f.label :ospassword, "Password" %>
+   <%= f.text_area :ospassword %>
+  </div>
+
+  <div class="field">
+   <%= f.label :osprojectname, "Project" %>
+   <%= f.text_area :osprojectname %>
+  </div>
+
+  <div class="field">
+   <%= f.label :osdomainname, "Domain" %>
+   <%= f.text_area :osdomainname %>
+  </div>
+
+  <div class="field">
+   <%= f.label :osregions "Regions" %>
+   <%= f.text_area :osregions %>
+  </div>
+
+  <div class="field">
+   <%= f.label :osinsecure, "Insecure" %>
+   <%= f.text_area :osinsecure %>
+  </div>
+</div>
 
   <div class="actions">
     <%= f.submit %>

@@ -69,6 +69,6 @@ class CloudsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cloud_params
-      params.require(:cloud).permit(:name, :provider, :apikey, :secretkey, :endpoint)
+      params.require(:cloud).permit(:name, :provider, :azenabled, :azclientid, :azappkey, :aztenantid, :azsubscriptionid, :azobjectid, :azdefaultresourcegroup, :azdefaultkeyvault, :gcpenabled, :gcpdefaultregion, :gcpdefaultzone, :gcpproject, :gcpjsonkey, :k8senabled, :k8sdockerregistryaccount, :k8skubeconfig, :k8snamespaces, :k8scontext, :k8sdockerregistries, :drenabled, :draddress, :drusername, :drpassword, :dremail, :drrepositories, :osenabled, :osauthurl, :osusername, :ospassword, :osprojectname, :osdomainname, :osregions, :osinsecure)
     end
 end

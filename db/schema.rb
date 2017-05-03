@@ -33,12 +33,42 @@ ActiveRecord::Schema.define(version: 20170418201231) do
   create_table "clouds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "provider"
-    t.string   "apikey"
-    t.string   "secretkey"
-    t.string   "endpoint"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "azenabled"
+    t.string   "azclientid"
+    t.string   "azappkey"
+    t.string   "aztenantid"
+    t.string   "azsubscriptionid"
+    t.string   "azobjectid"
+    t.string   "azdefaultresourcegroup"
+    t.string   "azdefaultkeyvault"
+    t.string   "gcpenabled"
+    t.string   "gcpdefaultregion"
+    t.string   "gcpdefaultzone"
+    t.string   "gcpproject"
+    t.text     "gcpjsonkey",               limit: 65535
+    t.string   "k8senabled"
+    t.string   "k8sdockerregistryaccount"
+    t.text     "k8skubeconfig",            limit: 65535
+    t.string   "k8snamespaces"
+    t.string   "k8scontext"
+    t.string   "k8sdockerregistries"
+    t.string   "drenabled"
+    t.string   "draddress"
+    t.string   "drusername"
+    t.string   "drpassword"
+    t.string   "dremail"
+    t.string   "drrepositories"
+    t.string   "osenabled"
+    t.string   "osauthurl"
+    t.string   "osusername"
+    t.string   "ospassword"
+    t.string   "osprojectname"
+    t.string   "osdomainname"
+    t.string   "osregions"
+    t.string   "osinsecure"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.index ["user_id"], name: "index_clouds_on_user_id", using: :btree
   end
 
