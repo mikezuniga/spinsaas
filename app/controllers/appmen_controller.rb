@@ -1,6 +1,36 @@
 class AppmenController < ApplicationController
   before_action :set_appman, only: [:show, :edit, :update, :destroy]
 
+
+  # GET /appmen/1/getconfig
+  # GET /getconfig
+  def getconfig
+    @creds = @current_user.clouds.all.sort_by(&:provider)
+    @azure = false
+    @google = false
+    @kubernetes = false
+    @openstack = false
+    @dockerregistry = false
+    @aws = false
+    @creds.each do |c|
+      case c.provider
+      when "azure"
+        @azure = true
+      when "google"
+        @google = true
+      when "kubernetes"
+        @kubernetes = true
+      when "openstack"
+        @openstack = true
+      when "dockerregistry"
+        @dockerregistry = true
+      when "aws"
+        @aws = true
+      end
+    end
+    render "clouds/getconfig", layout: false
+  end
+
   # GET /appmen
   # GET /appmen.json
   def index

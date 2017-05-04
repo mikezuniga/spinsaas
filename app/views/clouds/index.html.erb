@@ -7,9 +7,6 @@
     <tr>
       <th>Name</th>
       <th>Provider</th>
-      <th>Apikey</th>
-      <th>Secretkey</th>
-      <th>Endpoint</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,9 +16,6 @@
       <tr>
         <td><%= cloud.name %></td>
         <td><%= cloud.provider %></td>
-        <td><%= cloud.apikey %></td>
-        <td><%= cloud.secretkey %></td>
-        <td><%= cloud.endpoint %></td>
         <td><%= link_to 'Show', cloud %></td>
         <td><%= link_to 'Edit', edit_cloud_path(cloud) %></td>
         <td><%= link_to 'Destroy', cloud, method: :delete, data: { confirm: 'Are you sure?' } %></td>

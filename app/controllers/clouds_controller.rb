@@ -1,10 +1,38 @@
 class CloudsController < ApplicationController
   before_action :set_cloud, only: [:show, :edit, :update, :destroy]
 
+  # GET /getconfig 
+  def getconfig
+    @creds = @current_user.clouds.all.sort_by(&:provider)
+    @azure = false
+    @google = false
+    @kubernetes = false
+    @openstack = false
+    @dockerregistry = false
+    @aws = false
+    @creds.each do |c|
+      case c.provider
+      when "azure"
+        @azure = true
+      when "google"
+        @google = true
+      when "kubernetes"
+        @kubernetes = true
+      when "openstack"
+        @openstack = true
+      when "dockerregistry"
+        @dockerregistry = true
+      when "aws"
+        @aws = true
+      end
+    end
+    render "clouds/getconfig", layout: false
+  end
+
   # GET /clouds
   # GET /clouds.json
   def index
-    @clouds = Cloud.all
+    @clouds = @current_user.clouds.all
   end
 
   # GET /clouds/1
@@ -25,7 +53,7 @@ class CloudsController < ApplicationController
   # POST /clouds.json
   def create
     @cloud = Cloud.new(cloud_params)
-
+    @cloud.user_id = session[:user_id]
     respond_to do |format|
       if @cloud.save
         format.html { redirect_to @cloud, notice: 'Cloud was successfully created.' }

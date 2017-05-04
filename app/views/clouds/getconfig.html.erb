@@ -1,0 +1,139 @@
+server:
+  port: ${services.clouddriver.port:7002}
+  address: ${services.clouddriver.host:localhost}
+
+redis:
+  connection: ${services.redis.connection:redis://localhost:6379}
+
+udf:
+  enabled: ${services.clouddriver.aws.udf.enabled:true}
+
+default:
+  account:
+    env: ${providers.aws.primaryCredentials.name}
+
+aws:
+  enabled: ${providers.aws.enabled:false}
+  defaults:
+    iamRole: ${providers.aws.defaultIAMRole:BaseIAMRole}
+  defaultRegions:
+    - name: ${providers.aws.defaultRegion:us-east-1}
+  defaultFront50Template: ${services.front50.baseUrl}
+  defaultKeyPairTemplate: ${providers.aws.defaultKeyPairTemplate}
+
+azure:
+  enabled: ${providers.azure.enabled:false}
+  accounts:
+    <% @creds.each do |c| %>
+      <% if c.provider == "azure" %>  
+    - name: <%= c.name %>
+      clientId: <%= c.azclientid %>
+      appKey: <%= c.azappkey %>
+      tenantId: <%= c.aztenantid %>
+      subscriptionId: <%= c.azsubscriptionid %>
+      defaultResourceGroup: <%= c.azdefaultresourcegroup %>
+      defaultKeyVault: <%= c.azdefaultkeyvault %>
+      <% end %>
+    <% end %>
+
+google:
+  enabled: ${providers.google.enabled:false}
+  accounts:
+    <% @creds.each do |c| %>
+      <% if c.provider == "google" %>
+    - name: <%= c.name %>
+      project: <%= c.gcpproject %>
+      jsonPath: /opt/spinnaker/creds/gcp/<%= c.name %>
+      consul:
+        enabled: ${providers.google.primaryCredentials.consul.enabled:false}
+      # imageProjects:
+      <% end %>
+    <% end %>
+
+cf:
+  enabled: ${providers.cf.enabled:false}
+  accounts:
+    - name: ${providers.cf.primaryCredentials.name}
+      api: ${providers.cf.primaryCredentials.api}
+      console: ${providers.cf.primaryCredentials.console}
+      org: ${providers.cf.defaultOrg}
+      space: ${providers.cf.defaultSpace}
+      username: ${providers.cf.account.name:}
+      password: ${providers.cf.account.password:}
+
+kubernetes:
+  enabled: ${providers.kubernetes.enabled:false}
+  accounts:
+    <% @creds.each do |c| %>
+      <% if c.provider == "kubernetes" %>
+    - name: <%= c.name %>
+      dockerRegistries:
+        - accountName: <%= c.k8sdockerregistries %>
+      <% end %>
+    <% end %>
+
+openstack:
+  enabled: ${providers.openstack.enabled:false}
+  accounts:
+    <% @creds.each do |c| %>
+      <% if c.provider == "openstack" %>
+    - name: <%= c.name %>
+      authUrl: <%= c.osauthurl %>
+      username: <%= c.osusername %>
+      password: <%= c.ospassword %>
+      projectName: <%= c.osprojectname %>
+      domainName: <%= c.osdomainname %>
+      regions: <%= c.osregions %>
+      insecure: <%= "true" if c.osinsecure == 1 %>
+      #userDataFile: ${providers.openstack.primaryCredentials.userDataFile:}
+      #heatTemplatePath: /opt/heat
+      lbaas:
+        pollTimeout: 60
+        pollInterval: 5
+      <% end %>
+    <% end %>
+
+appengine:
+  enabled: ${providers.appengine.enabled:false}
+  accounts:
+    - name: ${providers.appengine.primaryCredentials.name}
+      project: ${providers.appengine.primaryCredentials.project}
+      jsonPath: ${providers.appengine.primaryCredentials.jsonPath}
+      sshPrivateKeyFilePath: ${providers.appengine.primaryCredentials.sshPrivateKeyFilePath}
+      sshPrivateKeyPassphrase: ${providers.appengine.primaryCredentials.sshPrivateKeyPassphrase}
+      gitHttpsUsername: ${providers.appengine.primaryCredentials.gitHttpsUsername}
+      gitHttpsPassword: ${providers.appengine.primaryCredentials.gitHttpsPassword}
+      githubOAuthAccessToken: ${providers.appengine.primaryCredentials.githubOAuthAccessToken}
+
+dockerRegistry:
+  enabled: ${providers.dockerRegistry.enabled:false}
+  accounts:
+    <% @creds.each do |c| %>
+    <% if c.provider == "dockerregistry" %>
+    - name: <%= c.name %>
+      address: <%= c.draddress %>
+      username: <%= c.drusername %>
+      password: <%= c.drpassword %>
+      email: <%= c.dremail %>
+      repositories:
+        <% c.drrepositories.split(',').each do |r| %>
+        - <%= r %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+credentials:
+  primaryAccountTypes: ${providers.aws.primaryCredentials.name}, ${providers.google.primaryCredentials.name}, ${providers.cf.primaryCredentials.name}, ${providers.azure.primaryCredentials.name}
+  challengeDestructiveActionsEnvironments: ${providers.aws.primaryCredentials.name}, ${providers.google.primaryCredentials.name}, ${providers.cf.primaryCredentials.name}, ${providers.azure.primaryCredentials.name}
+
+spectator:
+  applicationName: ${spring.application.name}
+  webEndpoint:
+    enabled: ${services.spectator.webEndpoint.enabled:false}
+    prototypeFilter:
+      path: ${services.spectator.webEndpoint.prototypeFilter.path:}
+
+  stackdriver:
+    enabled: ${services.stackdriver.enabled}
+    projectName: ${services.stackdriver.projectName}
+    credentialsPath: ${services.stackdriver.credentialsPath}

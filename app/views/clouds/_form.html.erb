@@ -36,7 +36,7 @@
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseopenstack" aria-expanded="false" aria-controls="collapseopenstack">
   Openstack
 </button> 
- 
+<br> 
 <div class="collapse" id="collapseazure">
   <%= f.label :azure %>
   <div class="field">
@@ -69,7 +69,7 @@
 
   <div class="field">
     <%= f.label :azdefaultresourcegroup, "Default Resource Group" %>
-    <%= f.text_field :azdefaultsourcegroup %>
+    <%= f.text_field :azdefaultresourcegroup %>
   </div>
 
   <div class="field">
@@ -144,7 +144,7 @@
   <%= f.label :dockerregistry %>
   <div class="field">
    <%= f.label :drenabled, "Enabled?" %>
-   <%= f.text_area :drenable %>
+   <%= f.text_area :drenabled %>
   </div>  
 
   <div class="field">
@@ -173,7 +173,7 @@
   </div>
 </div>
 
-<div class="field" id="collapseopenstack">
+<div class="collapse" id="collapseopenstack">
   <%= f.label :openstack %>
   <div class="field">
    <%= f.label :osenabled, "Enabled?" %>
@@ -206,7 +206,7 @@
   </div>
 
   <div class="field">
-   <%= f.label :osregions "Regions" %>
+   <%= f.label :osregions, "Regions" %>
    <%= f.text_area :osregions %>
   </div>
 
@@ -215,7 +215,8 @@
    <%= f.text_area :osinsecure %>
   </div>
 </div>
-
+</br>
+</br>
   <div class="actions">
     <%= f.submit %>
   </div>
