@@ -7,17 +7,17 @@
 
 <p>
   <strong>Stackmetadata:</strong>
-  <%= @appman.stackmetadata %>
+  <%= raw @appman.stackmetadata %>
 </p>
 
 <p>
   <strong>Stackid:</strong>
-  <%= @appman.stackid %>
+  <%= raw @appman.stackid %>
 </p>
 
 <p>
   <strong>Details:</strong>
-  <%= @appman.details %>
+  <%= raw @appman.details %>
 </p>
 
 <%= link_to 'Back', appmen_path %>

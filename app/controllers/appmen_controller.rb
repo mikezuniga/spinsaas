@@ -2,10 +2,13 @@ class AppmenController < ApplicationController
   before_action :set_appman, only: [:show, :edit, :update, :destroy]
 
 
-  # GET /appmen/1/getconfig
+  # GET /appmen/112341234-1234-12341234-1234/getconfig
   # GET /getconfig
   def getconfig
-    @creds = @current_user.clouds.all.sort_by(&:provider)
+    #@creds = @current_user.clouds.all.sort_by(&:provider)
+    #@stack = Appman.find_by_uuid(params[:uuid])
+    #@creds = @stack.clouds.all.sort_by(&:provider)
+    @creds = Cloud.all.sort_by(&:provider)
     @azure = false
     @google = false
     @kubernetes = false
@@ -28,6 +31,7 @@ class AppmenController < ApplicationController
         @aws = true
       end
     end
+    @appmenid = params[:uuid]
     render "clouds/getconfig", layout: false
   end
 

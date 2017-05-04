@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170418201231) do
     t.string   "name"
     t.text     "stackmetadata", limit: 65535
     t.string   "stackid"
+    t.string   "uuid"
     t.text     "details",       limit: 65535
     t.integer  "user_id"
     t.datetime "created_at",                  null: false

@@ -10,8 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
 
     <title>Cloud Platform Portal</title>
 
@@ -58,8 +58,8 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                   <% if current_user %>
-                   Signed in as <strong><%= current_user.name %></strong>!
+                   <% if @current_user %>
+                   Signed in as <strong><%= @current_user.name %></strong>!
                    <% end %>
                 </li>
                 <!-- /.dropdown -->
@@ -69,7 +69,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
-                            <% if current_user %>
+                            <% if @current_user %>
                                 <%= link_to "Sign out", signout_path, id: "sign_out" %>
                             <% else %>
                                 <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>

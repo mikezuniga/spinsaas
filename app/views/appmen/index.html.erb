@@ -17,9 +17,59 @@
     <% @appmen.each do |appman| %>
       <tr>
         <td><%= appman.name %></td>
-        <td><%= appman.stackmetadata %></td>
-        <td><%= appman.stackid %></td>
-        <td><%= appman.details %></td>
+        <td>
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#appman-<%= appman.uuid %>-metadata">Click Here</button>
+        <div class="modal fade" id="appman-<%= appman.uuid %>-metadata" tabindex="-1" role="dialog" aria-labelledby="appman-<%= appman.uuid %>-label-metadata">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class=modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="appman-<%= appman.uuid %>-label-metadata">Metadata</h4>
+              </div>
+              <div class="modal-body">
+                <%= raw appman.stackmetadata %>
+              </div>
+            </div>
+          </div>
+        </div>
+        </td>
+
+        <td>
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#appman-<%= appman.uuid %>-id">Click Here</button>
+        <div class="modal fade" id="appman-<%= appman.uuid %>-id" tabindex="-1" role="dialog" aria-labelledby="appman-<%= appman.uuid %>-label-id">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class=modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="appman-<%= appman.uuid %>-label-id">Stack Id</h4>
+              </div>
+              <div class="modal-body">
+                <%= raw appman.stackid %>
+              </div>
+            </div>
+          </div>
+        </div>
+        </td>
+
+        <td>
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#appman-<%= appman.uuid %>-details">Click Here</button>
+        <div class="modal fade" id="appman-<%= appman.uuid %>-details" tabindex="-1" role="dialog" aria-labelledby="appman-<%= appman.uuid %>-label-details">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class=modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="appman-<%= appman.uuid %>-label-details">Details</h4>
+              </div>
+              <div class="modal-body">
+                <%= raw appman.details %>
+              </div>
+            </div>
+          </div>
+        </div>
+        </td>
+
+
+
         <td><%= link_to 'Show', appman %></td>
         <td><%= link_to 'Destroy', appman, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

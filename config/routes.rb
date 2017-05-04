@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
 
-  get 'appmen/:id/getconfig', to: 'appmen#getconfig'
-  get 'clouds/getconfig'
+  get 'appmen/:uuid/getconfig', to: 'appmen#getconfig'
+  #get 'clouds/getconfig'
 
   resources :appmen
   resources :clouds
