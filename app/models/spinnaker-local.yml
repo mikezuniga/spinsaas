@@ -1,0 +1,142 @@
+global:
+  spinnaker:
+    timezone: 'America/Los_Angeles'
+
+providers:
+  aws:
+    enabled: ${SPINNAKER_AWS_ENABLED:false}
+    defaultRegion: ${SPINNAKER_AWS_DEFAULT_REGION:us-west-2}
+    defaultIAMRole: BaseIAMRole
+    primaryCredentials:
+      name: default
+    defaultKeyPairTemplate: "{{name}}-keypair"
+
+  azure:
+    enabled: ${SPINNAKER_AZURE_ENABLED:false}
+    defaultRegion: ${SPINNAKER_AZURE_DEFAULT_REGION:westus}
+    primaryCredentials:
+      name: default
+      clientId:
+      appKey:
+      tenantId:
+      subscriptionId:
+
+  google:
+    enabled: ${SPINNAKER_GOOGLE_ENABLED:false}
+    defaultRegion: ${SPINNAKER_GOOGLE_DEFAULT_REGION:us-central1}
+    defaultZone: ${SPINNAKER_GOOGLE_DEFAULT_ZONE:us-central1-f}
+    primaryCredentials:
+      name: default
+      project: ${SPINNAKER_GOOGLE_PROJECT_ID:}
+      jsonPath: ${SPINNAKER_GOOGLE_PROJECT_CREDENTIALS_PATH:}
+
+  cf:
+    enabled: false
+    defaultOrg: spinnaker-cf-org
+    defaultSpace: spinnaker-cf-space
+    primaryCredentials:
+      name: default
+      api: my-cf-api-uri
+      console: my-cf-console-base-url
+
+  kubernetes:
+    enabled: ${SPINNAKER_KUBERNETES_ENABLED:false}
+    primaryCredentials:
+      name: default
+      dockerRegistryAccount: ${providers.dockerRegistry.primaryCredentials.name}
+
+  dockerRegistry:
+    enabled: ${SPINNAKER_KUBERNETES_ENABLED:false}
+    primaryCredentials:
+      name: default
+      address: ${SPINNAKER_DOCKER_REGISTRY:https://index.docker.io/}
+      repository: ${SPINNAKER_DOCKER_REPOSITORY:library/nginx}
+      username: admin
+      passwordFile: ${SPINNAKER_DOCKER_PASSWORD_FILE} 
+
+services:
+  default:
+    protocol: http    # Assume all spinnaker subsystems are using http
+    host: localhost   # Assume all spinnaker subsystems are on localhost
+
+  redis:
+    host: localhost
+
+  cassandra:
+    host: localhost
+
+  docker:
+    targetRepository: # Optional, but expected in spinnaker-local.yml if specified.
+
+  jenkins:
+    enabled: ${services.igor.enabled:false}
+    defaultMaster:
+      name: default
+      baseUrl: <%= @jenkinsurl %>
+      username: <%= @jenkinsuser %>
+      password: <%= @jenkinspassword %>
+
+  travis:
+    enabled: false
+    defaultMaster:
+      name: default
+      baseUrl: 
+      address: https://api.travis-ci.org
+      githubToken: # GitHub scopes currently required by Travis is required.
+
+  clouddriver:
+    aws:
+      udf:
+        enabled: true
+
+  igor:
+    enabled: true
+
+  deck:
+    baseUrl: http://<%= @stackname %>appman.mirapocnet.com:8080
+    gateUrl: ${services.deck.baseUrl}/gate
+    bakeryUrl: ${services.deck.baseUrl}/rosco
+    auth:
+      enabled: false
+
+  rosco:
+    configDir: /opt/rosco/config/packer
+
+  front50:
+    cassandra:
+      enabled: false
+    redis:
+      enabled: true
+    storage_bucket: ${SPINNAKER_DEFAULT_STORAGE_BUCKET:}
+    gcs:
+      enabled: false
+    s3:
+      enabled: false
+
+  echo:
+    cassandra:
+      enabled: true
+    inMemory:
+      enabled: false
+    cron:
+      enabled: true
+    notifications:
+      mail:
+        enabled: <%= @enable_email %>
+        host: <%= @email_server %>
+        fromAddress: <%= @email_server %>
+      hipchat:
+        enabled: <%= @enable_hipchat %>
+        url: <%= @hipchat_url %>
+        token: <%= @hipchat_token %>
+        botName: <%= @hipchat_botname %>
+      sms:
+        enabled: <%= @enable_twilio %>
+        account: <%= @twillio_account %>
+        token: <%= @twillio_token %>
+        from: <%= @twillio_sender %>
+      slack:
+        enabled: <%= @enable_slack %>
+        token: <%= @slack_token %>
+        botName: <%= @slack_bot %>
+

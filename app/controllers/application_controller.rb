@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   #helper_method :current_user
-  before_filter :authenticate, :except => ['show','create','destroy','getconfig']
+  before_filter :authenticate, :except => ['show','create','destroy','getclconfig','getspnkconfig']
 
   def current_user
     if session[:user_id]

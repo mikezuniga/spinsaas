@@ -2,13 +2,13 @@ class AppmenController < ApplicationController
   before_action :set_appman, only: [:show, :edit, :update, :destroy]
 
 
-  # GET /appmen/112341234-1234-12341234-1234/getconfig
-  # GET /getconfig
-  def getconfig
+  # GET /appmen/112341234-1234-12341234-1234/getclconfig
+  # GET /getclconfig
+  def getclconfig
     #@creds = @current_user.clouds.all.sort_by(&:provider)
-    #@stack = Appman.find_by_uuid(params[:uuid])
-    #@creds = @stack.clouds.all.sort_by(&:provider)
-    @creds = Cloud.all.sort_by(&:provider)
+    @stack = Appman.find_by_uuid(params[:uuid])
+    @creds = @stack.clouds.all.sort_by(&:provider)
+    #@creds = Cloud.all.sort_by(&:provider)
     @azure = false
     @google = false
     @kubernetes = false
@@ -32,9 +32,34 @@ class AppmenController < ApplicationController
       end
     end
     @appmenid = params[:uuid]
-    render "clouds/getconfig", layout: false
+    render "clouds/getclconfig", layout: false
   end
 
+  # GET /appmen/123412341234-12341234-12341-234/getspnkconfig
+  # GET /getspnkconfig
+  def getspnkconfig
+    @jenkinsurl = ""
+    @jenkinsuser = ""
+    @jenkinspassword = ""
+    @enable_email = false
+    @email_server = ""
+    @email_from = ""
+    @enable_hipchat = false
+    @hipchat_url = ""
+    @hipchat_token = ""
+    @hipchat_botname = ""
+    @enable_twilio = false
+    @twilio_account = ""
+    @twilio_token = ""
+    @twilio_sender = ""
+    @enable_slack = false
+    @slack_token = ""
+    @slack_bot = ""
+    @appman = Appman.find_by_uuid(params[:uuid])
+    @appmanid = params[:uuid]
+    @stackname = @appman.name
+    render "clouds/getspnkconfig", layout: false
+  end
   # GET /appmen
   # GET /appmen.json
   def index
@@ -107,6 +132,6 @@ class AppmenController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appman_params
-      params.require(:appman).permit(:name, :stackmetadata, :stackid, :details)
+      params.require(:appman).permit(:name, :stackmetadata, :stackid, :details, :cloud_ids)
     end
 end
